@@ -12,7 +12,7 @@ import test from "./page/test";
 const App = () => {
   return (
     <div className={styles.app}>
-      <h1>这是app测试组件</h1>
+      <h1>这是app测试页面</h1>
       <Home />
       <Button
         className={styles.btn}
