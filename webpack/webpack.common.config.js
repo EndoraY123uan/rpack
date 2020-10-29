@@ -3,8 +3,8 @@
  * @description: webpack通用配置
  * @Date: 2020-09-18 14:10:35
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-16 15:54:42
- * @FilePath: \webpack\webpack\webpack.common.config.js
+ * @LastEditTime: 2020-10-29 14:23:56
+ * @FilePath: \rpack\webpack\webpack.common.config.js
  */
 const path = require("path");
 const webpack = require("webpack");

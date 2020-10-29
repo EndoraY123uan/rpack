@@ -5,14 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --hot --env=development --config=webpack/webpack.config.js",
+    "dev": "webpack  --env=development --config=webpack/webpack.config.js",
     "prod": "webpack-dev-server --env=production  --config=webpack/webpack.config.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
     "antd": "^4.6.4",
+    "history": "^5.0.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",

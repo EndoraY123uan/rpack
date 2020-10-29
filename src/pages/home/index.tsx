@@ -1,10 +1,11 @@
 import React from "react";
-import Test from "../test";
 
 const Home = () => {
+  console.log('这是首页');
+  
   return (
     <div>
-      这是首页组件<Test></Test>
+      这是首页组件
     </div>
   );
 };
