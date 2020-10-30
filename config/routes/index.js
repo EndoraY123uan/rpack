@@ -3,35 +3,22 @@
  * @description: 路由配置
  * @Date: 2020-10-28 14:37:53
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-29 17:43:01
+ * @LastEditTime: 2020-10-30 16:52:23
  * @FilePath: \rpack\config\routes\index.js
  */
 import Home from "../../src/pages/home";
 import Test from "../../src/pages/test";
+import Two from "../../src/pages/two";
 
 const routes = [
   {
     path: "/test",
-    // component: Test,
+    component: Test,
     children: [
       {
-        path: "/test/two",
-        component: Test,
+        path: "/two",
+        component: Two,
       },
-      // {
-      //   path: "/test/two",
-      //   component: Home,
-      // },
-      // {
-      //   path: "/three",
-      //   component: Test,
-      //   children: [
-      //     {
-      //       path: "/four",
-      //       component: Home,
-      //     },
-      //   ],
-      // },
     ],
   },
   {

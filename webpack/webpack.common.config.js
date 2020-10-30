@@ -3,7 +3,7 @@
  * @description: webpack通用配置
  * @Date: 2020-09-18 14:10:35
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-29 14:23:56
+ * @LastEditTime: 2020-10-30 15:48:56
  * @FilePath: \rpack\webpack\webpack.common.config.js
  */
 const path = require("path");
@@ -24,38 +24,12 @@ let htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, "../public/index.html"),
 });
 
-// module.exports = {
-//   mode: "development", // production
-//   entry: path.resolve(__dirname, "../src/index.tsx"),
-//   output: {
-//     path: path.resolve(__dirname, "../dist"),
-//     filename: "[name].[hash:8].js",
-//   },
-//   moudle: { // 对模块的编译配置
-//     rules: [
-//       {
-//         test: /\.(js|jsx)$/,
-//         exclude: /node_moudles/,
-//         use: {
-//           loader: "babel-loader",
-//         },
-//       },
-//     ],
-//   },
-//   resolve: { // 如何解析模块
-//     alias: {
-//       "@": path.resolve(__dirname,"../src"),
-//     },
-//     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
-//   },
-//   plugins: [],
-// };
-
 module.exports = {
   // 配置入口文件
   entry: [path.resolve(__dirname, "../src/index.tsx")],
   // 出口文件目录为根目录下dist, 输出的文件名为main
   output: {
+    publicPath: "/",
     path: path.resolve(__dirname, "../dist"),
     filename: "[name].[hash:8].js",
   },
