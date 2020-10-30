@@ -8,6 +8,7 @@ const Test = (props) => {
     <div>
       这是测试页面组件
       <Link to="/test/two">two</Link>
+      {props.children}
     </div>
   );
 };
