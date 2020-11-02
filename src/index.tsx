@@ -3,7 +3,7 @@
  * @description: 入口文件
  * @Date: 2020-08-21 12:15:25
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-30 18:30:35
+ * @LastEditTime: 2020-11-02 11:18:45
  * @FilePath: \rpack\src\index.tsx
  */
 import React from "react";
@@ -17,6 +17,8 @@ import {
 
 import history from "./utils/history";
 import routes from "../config/routes";
+
+
 
 console.log("here=========", routes);
 
@@ -38,11 +40,6 @@ const RouteWithSubRoutes = ({ route }) => {
   console.log("route =====", route);
   if (!route) return null;
   const { path, children = [], component: Component } = route;
-  console.log(
-    ">>>>",
-    path,
-    children.map((route) => route.path)
-  );
 
   return (
     <Route

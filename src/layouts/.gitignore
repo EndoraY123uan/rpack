@@ -1,9 +1,0 @@
-node_modules/
-
-dist/
-
-.vscode
-
-# log files
-yarn-error.log*
-
