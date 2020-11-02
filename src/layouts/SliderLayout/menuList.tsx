@@ -21,6 +21,29 @@ interface menuItemProps {
 const MenuList = (props: Props) => {
   const { menuList, history } = props;
 
+  const [rootSubmenuKeysList, setrootSubmenuKeysList] = useState<string[]>([]);
+  const [openKeys, setopenKeys] = useState(rootSubmenuKeysList[0]);
+
+  const getRootSubmenuKeys = (path: string) => {
+    const arr = path.split("/");
+    arr.length > 2 ? null : rootSubmenuKeysList.push(`/${arr[1]}`);
+    // return rootRoute;
+  };
+
+  const onOpenChange = (openKeys: String[]) => {
+    const latestOpenKey = openKeys.find((key) => openKeys.indexOf(key) === -1);
+    console.log("openkey--------", latestOpenKey);
+
+    // if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+    //   setState({ openKeys });
+
+    // } else {
+    //   setState({
+    //     openKeys: latestOpenKey ? [latestOpenKey] : [],
+    //   });
+    // }
+  };
+
   const getIcon = (icon?: string) => {
     if (!icon) return null;
     const Icon = IconMap[icon];
@@ -30,6 +53,7 @@ const MenuList = (props: Props) => {
 
   const menuItemRender = (menu: menuItemProps) => {
     const { path, name, children, icon } = menu;
+    getRootSubmenuKeys(path);
     if (!path) return null;
     if (children) {
       return (
@@ -55,6 +79,7 @@ const MenuList = (props: Props) => {
         onSelect={({ key }) => {
           history.push(key);
         }}
+        onOpenChange={() => onOpenChange}
       >
         {menuList.map((item: any, key) => menuItemRender(item))}
       </Menu>

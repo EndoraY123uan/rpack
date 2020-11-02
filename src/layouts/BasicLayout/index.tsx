@@ -24,7 +24,6 @@ interface Props {
 }
 
 const BasicLayout = (props: Props) => {
-  console.log("history--------", props);
   const { history } = props;
   const [collapsed, setcollapsed] = useState(false);
 
