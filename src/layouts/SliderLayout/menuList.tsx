@@ -3,6 +3,8 @@ import { Menu } from "antd";
 
 import IconMap from "../../../config/icon";
 
+import RootMenuList from "../../utils/menu";
+
 const { SubMenu, Item } = Menu;
 
 interface Props {
@@ -20,44 +22,33 @@ interface menuItemProps {
 
 const MenuList = (props: Props) => {
   const { menuList, history } = props;
+  const [openKeys, setopenKeys] = useState<string[]>([RootMenuList[0]]);
 
-  const [rootSubmenuKeysList, setrootSubmenuKeysList] = useState<string[]>([]);
-  const [openKeys, setopenKeys] = useState(rootSubmenuKeysList[0]);
-
-  const getRootSubmenuKeys = (path: string) => {
-    const arr = path.split("/");
-    arr.length > 2 ? null : rootSubmenuKeysList.push(`/${arr[1]}`);
-    // return rootRoute;
-  };
-
-  const onOpenChange = (openKeys: String[]) => {
-    const latestOpenKey = openKeys.find((key) => openKeys.indexOf(key) === -1);
-    console.log("openkey--------", latestOpenKey);
-
-    // if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-    //   setState({ openKeys });
-
-    // } else {
-    //   setState({
-    //     openKeys: latestOpenKey ? [latestOpenKey] : [],
-    //   });
-    // }
+  const onOpenChange = (openKeysArr: any[]) => {
+    const latestOpenKey = openKeysArr.find(
+      (key: any) => openKeys.indexOf(key) === -1
+    );
+    if (RootMenuList.indexOf(latestOpenKey) === -1) {
+      setopenKeys(openKeysArr);
+    } else {
+      const keyArr = latestOpenKey ? [latestOpenKey] : [];
+      setopenKeys(keyArr);
+    }
   };
 
   const getIcon = (icon?: string) => {
     if (!icon) return null;
     const Icon = IconMap[icon];
     if (!Icon) return null;
-    return IconMap[icon];
+    return Icon;
   };
 
   const menuItemRender = (menu: menuItemProps) => {
     const { path, name, children, icon } = menu;
-    getRootSubmenuKeys(path);
     if (!path) return null;
     if (children) {
       return (
-        <SubMenu key={String(path)} icon={getIcon(icon)} title={name}>
+        <SubMenu key={path} icon={getIcon(icon)} title={name}>
           {children.map((item: any) => {
             return menuItemRender(item);
           })}
@@ -65,7 +56,7 @@ const MenuList = (props: Props) => {
       );
     }
     return (
-      <Item key={String(path)} icon={getIcon(icon)}>
+      <Item key={path} icon={getIcon(icon)}>
         {name}
       </Item>
     );
@@ -79,7 +70,8 @@ const MenuList = (props: Props) => {
         onSelect={({ key }) => {
           history.push(key);
         }}
-        onOpenChange={() => onOpenChange}
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
       >
         {menuList.map((item: any, key) => menuItemRender(item))}
       </Menu>

@@ -2,6 +2,7 @@ import React, { ReactChildren, useState } from "react";
 import { Layout, Button } from "antd";
 
 import SilderLayout from "../SliderLayout";
+import HeaderLayout from "../HeaderLayout";
 import {
   AppstoreOutlined,
   MenuUnfoldOutlined,
@@ -13,7 +14,6 @@ import {
 } from "@ant-design/icons";
 
 import BasicRoutes from "../../../config/routes/basic";
-import History from "history";
 
 import styles from "./index.less";
 
@@ -37,20 +37,20 @@ const BasicLayout = (props: Props) => {
     mode: "inline",
     theme: "dark",
     history: history,
+    collapsed: collapsed,
   };
 
   return (
     <Layout className={styles.basic}>
-      <Sider theme="light" collapsible collapsed={collapsed}>
-        <SilderLayout {...sliderProps} />
-      </Sider>
+      <SilderLayout {...sliderProps} />
       <Layout>
-        <Header>
+        <Header className={styles.header}>
           <Button type="primary" onClick={changeCollapsed}>
             {React.createElement(
               collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
             )}
           </Button>
+          <HeaderLayout />
         </Header>
         <Content>{props.children}</Content>
       </Layout>
