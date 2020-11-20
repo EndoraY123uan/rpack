@@ -3,14 +3,17 @@
  * @description: jest配置文件
  * @Date: 2020-11-18 17:26:11
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-11-20 10:56:39
+ * @LastEditTime: 2020-11-20 17:45:05
  * @FilePath: \rpack\jest.config.js
  */
+
+const path = require("path");
+
 module.exports = {
   transform: {
     "^.+\\.tsx?$": "babel-jest",
   },
-  rootDir: "./src",
+  rootDir: path.resolve(__dirname, "src"),
   testMatch: [
     "<rootDir>/**/__tests__/**/*.{js,jsx,ts,tsx}",
     //  "<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}",
@@ -25,7 +28,8 @@ module.exports = {
   },
   moduleNameMapper: {
     "\\.(less)$": "identity-obj-proxy",
-    "@/(.*)$": "<rootDir>/$",
+    "@/(.*)$": "<rootDir>/$1",
+    //"@/":"<rootDir>/"
   },
   // testRegex:['two2.test.tsx']
   setupFiles: ["<rootDir>/enzyme-setup.ts"],

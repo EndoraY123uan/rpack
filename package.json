@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run test && npm run dev",
+    "start": "npm run dev",
     "dev": "webpack-dev-server  --env=development --config=webpack/webpack.config.js",
     "prod": "webpack --env=production  --config=webpack/webpack.config.js",
     "test": "jest --watch --color"

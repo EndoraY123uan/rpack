@@ -1,5 +1,8 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
+
+import request from "@/utils/request";
+
 import styles from "./index.less";
 
 const layout = {
@@ -12,13 +15,21 @@ const tailLayout = {
 
 const Two2 = () => {
   const onFinish = (values: any) => {
-    console.log("Success:", values);
-    
+    console.log(
+      "%c 🍓 values: ",
+      "font-size:20px;background-color: #E41A6A;color:#fff;",
+      values
+    );
+    request("/api/login", values).then((data) => {
+      console.log(
+        "%c 🥞 data: ",
+        "font-size:20px;background-color: #FFDD4D;color:#fff;",
+        data
+      );
+    });
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = (errorInfo: any) => {};
 
   return (
     <Form
@@ -51,7 +62,7 @@ const Two2 = () => {
       </Form.Item> */}
 
       <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit" >
+        <Button type="primary" htmlType="submit">
           登录
         </Button>
       </Form.Item>
