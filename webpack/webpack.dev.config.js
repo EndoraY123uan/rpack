@@ -3,7 +3,7 @@
  * @description: $1
  * @Date: 2020-10-20 15:49:10
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-11-19 15:38:16
+ * @LastEditTime: 2020-11-20 11:36:05
  * @FilePath: \rpack\webpack\webpack.dev.config.js
  */
 
@@ -20,6 +20,7 @@ module.exports = {
     hot: true,
     open: true,
     historyApiFallback: true,
+    prosy
   },
   // 装载虚拟目录插件
   plugins: [new CleanWebpackPlugin()],
