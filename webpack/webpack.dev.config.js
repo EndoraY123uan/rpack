@@ -3,7 +3,7 @@
  * @description: $1
  * @Date: 2020-10-20 15:49:10
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-29 19:49:16
+ * @LastEditTime: 2020-11-19 15:38:16
  * @FilePath: \rpack\webpack\webpack.dev.config.js
  */
 
@@ -17,7 +17,7 @@ module.exports = {
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 3333,
-    hot: false,
+    hot: true,
     open: true,
     historyApiFallback: true,
   },

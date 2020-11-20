@@ -3,18 +3,24 @@
  * @description: webpack通用配置
  * @Date: 2020-09-18 14:10:35
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-10-30 15:48:56
+ * @LastEditTime: 2020-11-12 15:17:45
  * @FilePath: \rpack\webpack\webpack.common.config.js
  */
 const path = require("path");
+const fs = require('fs')
+
+const appDirectory = fs.realpathSync(process.cwd());
+
 const webpack = require("webpack");
-const resolve = (dir) => path.resolve(__dirname, dir);
+const resolve = (dir) => path.resolve(appDirectory, dir);
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const REGEXP_CSS = /\.css$/;
 const REGEXP_CSS_MODULE = /\.(module|m)\.css$/;
 const REGEXP_LESS = /\.less$/;
 const REGEXP_LESS_MODULE = /\.(module|m)\.less$/;
+
+
 
 // 负责将html文档虚拟到根目录下
 let htmlWebpackPlugin = new HtmlWebpackPlugin({
