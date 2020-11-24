@@ -3,7 +3,7 @@
  * @description: $1
  * @Date: 2020-11-19 18:38:25
  * @LastEditors: jinzi.yuan
- * @LastEditTime: 2020-11-23 18:50:51
+ * @LastEditTime: 2020-11-24 18:21:08
  * @FilePath: \rpack\src\__tests__\async.test.ts
  */
 import request from "@/utils/request";
@@ -12,7 +12,7 @@ import fetch from "isomorphic-fetch";
 const righrUrl = "http://localhost:3000/test";
 const failUrl = "http://localhost:3000/test1";
 
-// 正常异步请求
+// callback 回调
 const asyncFun = (fn: Function) => {
   fetch(righrUrl)
     .then((data) => {
@@ -23,14 +23,14 @@ const asyncFun = (fn: Function) => {
     });
 };
 
-// promise请求1
+// promise  回调
 const asyncTwoFun = (fn: Function) => {
   request(righrUrl).then((data) => {
     fn(data);
   });
 };
 
-//promise请求2
+//promise
 const asyncPromise = (url: string) => {
   return request(url);
 };
@@ -41,50 +41,67 @@ const awaitFn = (url: string) => {
 };
 
 describe("async", () => {
-  //   it("normal async fn", () => {
-  //     asyncFun((data: any) => {
-  //       expect(data.message).toBe("okr"); // 异步问题 永远通过 即使url不存在;
-  //     });
-  //   });
+  let test = "test";
+  beforeAll(() => {
+    console.log("这是父级 集合", test);
+  });
 
-  //   it("promise fn", () => {
-  //     asyncTwoFun((data: any) => {
-  //       expect(data.message).toBe("ok"); // 正常
-  //     });
-  //   });
+  describe("solve async callback", () => {
+    beforeAll(() => {
+      console.log("这是子集 1", test);
+    });
 
-  it("promise then 1", () => {
-    asyncPromise(failUrl).then((data) => {
-      // 还是会通过 不走then
-      expect(data).toEqual({
-        message: "okr",
+    // 使用正常异步请求方法
+    // it("normal async fn", (done) => {
+    //   asyncFun((data: any) => {
+    //     expect(data.message).toBe("ok"); // 异步问题 永远通过 即使url不存在;
+    //     done();
+    //   });
+    // });
+
+    it("normal async", () => {
+      asyncFun((data: any) => {
+        expect(data.message).toBe("okry"); // 异步问题 永远通过 即使url不存在
       });
     });
 
-    // expect(asyncPromise(righrUrl)).resolves.toEqual({
-    //   message: "ok",
-    // });
-
-    expect(asyncPromise(failUrl)).rejects.toEqual({
-      message: "ok",
-    });
+    // 使用promise解决回调
+    //   it("promise fn", () => {
+    //     asyncTwoFun((data: any) => {
+    //       expect(data.message).toBe("ok"); // 测试正常
+    //     });
+    //   });
   });
 
-  //   it("async await ", async () => {
-  //     return await expect(awaitFn(righrUrl)).resolves.toEqual({
-  //       message: "ok",
-  //     });
-  //     // asyncPromise("http://localhost:3000/promise").then((data) => {
+  // describe("async solutions", () => {
+  //   beforeAll(() => {
+  //     console.log("这是子集 2", test);
+  //   });
+
+  //   it("promise", () => {
+  //     // asyncPromise(failUrl).then((data) => {
+  //     //   // 还是会通过 不走then
   //     //   expect(data).toEqual({
   //     //     message: "okr",
   //     //   });
   //     // });
+
+  //     expect.assertions(1);
+
+  //     // expect(asyncPromise(failUrl)).rejects.toEqual({
+  //     //   FetchError:
+  //     //     "......",
+  //     // });
+
+  //     return expect(asyncPromise(righrUrl)).resolves.toEqual({
+  //       message: "ok",
+  //     }); // 必须使用 return 返回 否则报错
   //   });
 
-  // it("promise fail", () => {
-  //   expect.assertions(1)
-  //   asyncPromise("http://localhost:3000/promise").catch((e) => {
-  //     expect(e.toString().indexOf("404") > -1).toBeFalsy();
+  //   it("async await ", async () => {
+  //     await expect(awaitFn(righrUrl)).resolves.toEqual({
+  //       message: "ok",
+  //     });
   //   });
   // });
 });
