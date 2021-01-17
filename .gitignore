@@ -4,6 +4,8 @@ dist/
 
 .vscode
 
+.DS_Store
+
 # log files
 yarn-error.log*
 
