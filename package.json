@@ -32,6 +32,8 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime-corejs2": "^7.9.2",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@types/classnames": "^2.2.10",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/isomorphic-fetch": "^0.0.35",
@@ -62,12 +64,12 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^4.2.0",
     "html-webpack-tags-plugin": "^2.0.17",
-    "husky": "^4.2.5",
+    "husky": "^4.3.8",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^3.0.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
-    "lint-staged": "^10.1.4",
+    "lint-staged": "^10.5.3",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.9.0",
     "mocha": "^8.2.1",
@@ -94,5 +96,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "husky":{
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  },
+  "lintstaged":{
+      "src/**/*.js": ["eslint --fix", "git add"]
+  }
 }
