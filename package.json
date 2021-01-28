@@ -97,11 +97,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "husky":{
-    "pre-commit": "lint-staged",
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged --ignore-path=.prettierignore",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
-  "lintstaged":{
-      "src/**/*.js": ["eslint --fix", "git add"]
+  "lintstaged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
