@@ -28,7 +28,7 @@
 | ci       | 持续集成修改                         |
 | docs     | 文档修改                             |
 | feat     | 新特性                               |
-| fix      | 修改问题                             |
+| fix      | 修改问题（bug 修改）                 |
 | updated  | 更新代码                             |
 | perf     | 优化相关，比如提升性能、体验         |
 | refactor | 代码重构                             |
