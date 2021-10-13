@@ -7,20 +7,22 @@
  * @FilePath: \rpack\webpack\webpack.common.config.js
  */
 const path = require("path");
-const fs = require('fs')
+const fs = require("fs");
 
 const appDirectory = fs.realpathSync(process.cwd());
 
 const webpack = require("webpack");
 const resolve = (dir) => path.resolve(appDirectory, dir);
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const REGEXP_CSS = /\.css$/;
 const REGEXP_CSS_MODULE = /\.(module|m)\.css$/;
 const REGEXP_LESS = /\.less$/;
 const REGEXP_LESS_MODULE = /\.(module|m)\.less$/;
 
-
+const isProd = process.env.NODE_ENV === "production";
+console.log("---isProd---", isProd);
 
 // 负责将html文档虚拟到根目录下
 let htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -37,7 +39,7 @@ module.exports = {
   output: {
     publicPath: "/",
     path: path.resolve(__dirname, "../dist"),
-    filename: "[name].[hash:8].js",
+    filename: "[name].[chunkhash:8].js",
   },
   module: {
     rules: [
@@ -54,12 +56,20 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
+        test: REGEXP_CSS,
+        use: [
+          isProd ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+        ],
+      },
+      {
         oneOf: [
           {
             test: REGEXP_LESS,
             include: /src/,
             use: [
-              "style-loader",
+              isProd ? MiniCssExtractPlugin.loader : "style-loader",
+              // "style-loader",
               {
                 loader: "css-loader",
                 options: {
@@ -79,7 +89,8 @@ module.exports = {
             test: REGEXP_LESS,
             exclude: /src/,
             use: [
-              "style-loader",
+              isProd ? MiniCssExtractPlugin.loader : "style-loader",
+              // "style-loader",
               {
                 loader: "css-loader",
                 options: {
@@ -106,5 +117,5 @@ module.exports = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   // 装载虚拟目录插件
-  plugins: [htmlWebpackPlugin, new webpack.HotModuleReplacementPlugin()],
+  plugins: [htmlWebpackPlugin],
 };

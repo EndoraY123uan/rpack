@@ -7,8 +7,6 @@
  * @FilePath: \rpack\config\routes\basic.js
  */
 
-
-
 import Home from "../../src/pages/home";
 import Test1 from "../../src/pages/test1";
 import Test2 from "../../src/pages/test2";
@@ -31,7 +29,7 @@ const BasicRoutes = [
       {
         path: "/test1/two1",
         ecact: true,
-        name: "Test二级标题一",
+        name: "hash路由实现",
         icon: "DesktopOutlined",
         component: Two1,
       },
